@@ -1,0 +1,20 @@
+* to deploy locally
+
+1. type ' ng build ' in angular app then it will load files in dist or in nodejs folder (    if specified in angular.json file in angular project), Note: both ng build and ng serve clear the output folder before they build the project but only the ng build command writes the generated build artifacts to the output folder(dist).
+
+2. Note: base url(in service class) in angular is http://localhost:3000/tasks ( used to get services from back end nodejs ) this works here because nodejs server is started at localhost:3000. but will not when deployed in remote server.
+
+3.Note: cors is no longer required as frontend is run on backend server. before we required cors because angular is run on http://localhost:4200 and nodejs is run on http://localhost:3000 so we required cors to access different domains.
+
+4. get var path = require('path');//for loading static page path.join in index.js in nodejs(gets the root path)
+
+5. the ng build file (dist) should be in nodejs folder
+
+6.  app.use(express.static(path.join(__dirname,'dist/todolist'))); is used to tell server to load static files from this.
+
+7. in order to load index page we use app.get http service to load from dist by setting path
+
+app.get('/',(req,res)=>{
+    res.sendFile(path.join(__dirname,'dist/todolist/index.html'))
+}); 
+
